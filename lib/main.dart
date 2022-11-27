@@ -3,6 +3,7 @@ import 'package:todos/core/dependency_injection/injection.dart';
 import 'package:todos/presentation/task_list/page/todo_list_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureInjection();
 
   runApp(const TaskApp());

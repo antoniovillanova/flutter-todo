@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todos/core/dependency_injection/injection.dart';
@@ -13,7 +14,10 @@ class TodoListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('TO-DO list'),
       ),
-      body: const TodoListPageContent(itemCount: 5,),
+      body: BlocProvider<TodoListCubit>(
+      create: (context) => injector(),
+        child: const TodoListPageContent(),
+      ),
     );
   }
 }

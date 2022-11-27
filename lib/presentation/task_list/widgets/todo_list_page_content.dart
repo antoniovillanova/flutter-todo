@@ -5,21 +5,35 @@ import 'package:todos/presentation/task_list/state/todo_list_cubit.dart';
 import 'package:todos/presentation/task_list/widgets/todo_item_card.dart';
 
 class TodoListPageContent extends StatelessWidget {
-  final int itemCount;
-
   const TodoListPageContent({
     Key? key,
-    required this.itemCount,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal:16.0, vertical: 12.0,),
-          itemBuilder: (context, index) =>
-          TodoItemCard(title: 'Item $index'),
-          separatorBuilder: (context, index) => const SizedBox(height: 16.0),
-          itemCount: itemCount,
+    return BlocConsumer<TodoListCubit, TodoListState>(listener: (context, state) {
+      if (state is TodoListLoading) {
+        const SpinKitDualRing(color: Colors.green);
+      }
+      if (state is TodoListError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Cannot load data. Try Again'),
+            action: SnackBarAction(label: 'Try again', onPressed: () => context.read<TodoListCubit>().getAllTodo()),
+          ),
         );
+      }
+    }, builder: (context, state) {
+      if (state is TodoListSuccess) {
+        return ListView.separated(
+          itemBuilder: (context, index) => TodoItemCard(title: state.todoList[index].title ?? ''),
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 10.0,
+          ),
+          itemCount: state.todoList.length,
+        );
+      }
+      return Container();
+    });
   }
 }
