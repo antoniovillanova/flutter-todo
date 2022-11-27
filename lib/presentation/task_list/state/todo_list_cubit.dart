@@ -21,7 +21,7 @@ class TodoListCubit extends Cubit<TodoListState> {
     this._todoDeleteUseCase,
   ) : super(TodoListInitialState());
 
-  Future<void> onGetAllTodo() async {
+  Future<void> getAllTodo() async {
     emit(TodoListLoading());
     final result = await _todoGetAllUseCase.call();
     result.fold(
@@ -29,4 +29,22 @@ class TodoListCubit extends Cubit<TodoListState> {
       (r) => emit(TodoListSuccess(r)),
     );
   }
+/*
+  Future<void> onDeleteTodo(int todoId) async {
+    emit(TodoListLoading());
+    final result = await _todoDeleteUseCase.call(todoId);
+    result.fold(
+          (l) => emit(TodoListError(l)),
+          (r) => emit(),
+    );
+  }
+
+  Future<void> onAddTodo(Todo todo) async {
+    emit(TodoListLoading());
+    final result = await _todoAddUseCase.call(todo);
+    result.fold(
+          (l) => emit(TodoListError(l)),
+          (r) => emit(),
+    );
+  }*/
 }
