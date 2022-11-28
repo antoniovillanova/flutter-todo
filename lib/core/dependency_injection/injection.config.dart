@@ -13,9 +13,9 @@ import 'package:todos/data/data_source/remote/remote_todo_list_data_source.dart'
     as _i4;
 import 'package:todos/data/repository/todo_repository_impl.dart' as _i6;
 import 'package:todos/domain/repository/todo_repository.dart' as _i5;
-import 'package:todos/domain/use_cases/todo_add_use_case.dart' as _i7;
 import 'package:todos/domain/use_cases/todo_delete_use_case.dart' as _i8;
 import 'package:todos/domain/use_cases/todo_get_all_use_case.dart' as _i9;
+import 'package:todos/domain/use_cases/todo_update_use_case.dart' as _i7;
 import 'package:todos/presentation/task_list/state/todo_list_cubit.dart'
     as _i10;
 
@@ -38,15 +38,15 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i4.RemoteTodoListDataSource(gh<_i3.Dio>()));
     gh.lazySingleton<_i5.TodoRepository>(
         () => _i6.TodoRepositoryImpl(gh<_i4.RemoteTodoListDataSource>()));
-    gh.factory<_i7.TodoAddUseCase>(
-        () => _i7.TodoAddUseCase(gh<_i5.TodoRepository>()));
+    gh.factory<_i7.TodoUpdateUseCase>(
+        () => _i7.TodoUpdateUseCase(gh<_i5.TodoRepository>()));
     gh.factory<_i8.TodoDeleteUseCase>(
         () => _i8.TodoDeleteUseCase(gh<_i5.TodoRepository>()));
     gh.factory<_i9.TodoGetAllUseCase>(
         () => _i9.TodoGetAllUseCase(gh<_i5.TodoRepository>()));
     gh.factory<_i10.TodoListCubit>(() => _i10.TodoListCubit(
           gh<_i9.TodoGetAllUseCase>(),
-          gh<_i7.TodoAddUseCase>(),
+          gh<_i7.TodoUpdateUseCase>(),
           gh<_i8.TodoDeleteUseCase>(),
         ));
     return this;

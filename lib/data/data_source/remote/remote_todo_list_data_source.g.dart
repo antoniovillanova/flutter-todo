@@ -44,7 +44,10 @@ class _RemoteTodoListDataSource implements RemoteTodoListDataSource {
   }
 
   @override
-  Future<void> addTodo(todo) async {
+  Future<void> update(
+    id,
+    todo,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

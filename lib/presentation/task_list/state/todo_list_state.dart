@@ -17,3 +17,5 @@ class TodoListError extends TodoListState {
 
   TodoListError(this.error);
 }
+
+class TodoListItemChecked extends TodoListState {}

@@ -17,7 +17,7 @@ abstract class RemoteTodoListDataSource {
   Future<List<Todo>> getTodos();
 
   @POST("/todos")
-  Future<void> addTodo(@Body() Todo todo);
+  Future<void> update(@Path('todoId') int id, @Body() Todo todo);
 
   @DELETE("/todos")
   Future<void> deleteTodo(@Path('todoId') int id);

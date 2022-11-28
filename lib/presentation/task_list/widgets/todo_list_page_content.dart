@@ -18,7 +18,8 @@ class TodoListPageContent extends StatelessWidget {
             SnackBar(
               content: Text(state.error.message),
               action: SnackBarAction(
-                  label: 'Try again', onPressed: () => context.read<TodoListCubit>().getAllTodo()),
+                  label: 'Try again',
+                  onPressed: () => context.read<TodoListCubit>().getAllTodo()),
             ),
           );
         }
@@ -32,7 +33,10 @@ class TodoListPageContent extends StatelessWidget {
         }
         if (state is TodoListSuccess) {
           return ListView.separated(
-            itemBuilder: (context, index) => TodoItemCard(title: state.todoList[index].title ?? ''),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+            itemBuilder: (context, index) =>
+                TodoItemCard(todo: state.todoList[index]),
             separatorBuilder: (context, index) => const SizedBox(
               height: 10.0,
             ),

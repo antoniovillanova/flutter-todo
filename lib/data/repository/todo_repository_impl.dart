@@ -12,9 +12,9 @@ class TodoRepositoryImpl implements TodoRepository {
   TodoRepositoryImpl(this._remoteTodoListDataSource);
 
   @override
-  Future<Either<FlutterError, void>> addTodo(Todo todo) async {
+  Future<Either<FlutterError, void>> updateTodo(Todo todo) async {
     try{
-      return await _remoteTodoListDataSource.addTodo(todo).then((value) => Right(value));
+      return await _remoteTodoListDataSource.update(todo.id, todo).then((value) => Right(value));
     } catch(e) {
       return Left(FlutterError(e.toString()));
     }
