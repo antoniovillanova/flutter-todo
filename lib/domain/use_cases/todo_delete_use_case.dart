@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todos/domain/repository/todo_repository.dart';
 
-@lazySingleton
+@injectable
 class TodoDeleteUseCase {
   final TodoRepository _repository;
 

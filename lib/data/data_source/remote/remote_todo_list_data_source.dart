@@ -7,11 +7,11 @@ import '../../../domain/model/todo.dart';
 part 'remote_todo_list_data_source.g.dart';
 
 @lazySingleton
-@RestApi(baseUrl: 'https://jsonplaceholder.typicode.com/')
+@RestApi()
 abstract class RemoteTodoListDataSource {
 
   @factoryMethod
-  factory RemoteTodoListDataSource(Dio dio, {String baseUrl}) = _RemoteTodoListDataSource;
+  factory RemoteTodoListDataSource(Dio dio) = _RemoteTodoListDataSource;
 
   @GET("/todos")
   Future<List<Todo>> getTodos();

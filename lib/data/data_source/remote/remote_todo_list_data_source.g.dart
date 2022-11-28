@@ -12,9 +12,7 @@ class _RemoteTodoListDataSource implements RemoteTodoListDataSource {
   _RemoteTodoListDataSource(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://jsonplaceholder.typicode.com/';
-  }
+  });
 
   final Dio _dio;
 

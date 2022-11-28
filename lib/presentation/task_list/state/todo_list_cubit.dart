@@ -30,6 +30,12 @@ class TodoListCubit extends Cubit<TodoListState> {
     );
   }
 
+  @override
+  void onChange(Change<TodoListState> change) {
+    print(state);
+    super.onChange(change);
+  }
+
   // Future<void> onDeleteTodo(int todoId) async {
   //   emit(TodoListLoading());
   //   final result = await _todoDeleteUseCase.call(todoId);

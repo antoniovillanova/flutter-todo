@@ -15,7 +15,7 @@ class TodoListPage extends StatelessWidget {
         title: const Text('TO-DO list'),
       ),
       body: BlocProvider<TodoListCubit>(
-      create: (context) => injector(),
+      create: (context) => injector()..getAllTodo(),
         child: const TodoListPageContent(),
       ),
     );

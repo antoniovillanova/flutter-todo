@@ -11,29 +11,36 @@ class TodoListPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TodoListCubit, TodoListState>(listener: (context, state) {
-      if (state is TodoListLoading) {
-        const SpinKitDualRing(color: Colors.green);
-      }
-      if (state is TodoListError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Cannot load data. Try Again'),
-            action: SnackBarAction(label: 'Try again', onPressed: () => context.read<TodoListCubit>().getAllTodo()),
-          ),
-        );
-      }
-    }, builder: (context, state) {
-      if (state is TodoListSuccess) {
-        return ListView.separated(
-          itemBuilder: (context, index) => TodoItemCard(title: state.todoList[index].title ?? ''),
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 10.0,
-          ),
-          itemCount: state.todoList.length,
-        );
-      }
-      return Container();
-    });
+    return BlocConsumer<TodoListCubit, TodoListState>(
+      listener: (context, state) {
+        if (state is TodoListError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error.message),
+              action: SnackBarAction(
+                  label: 'Try again', onPressed: () => context.read<TodoListCubit>().getAllTodo()),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is TodoListLoading) {
+          return const SpinKitChasingDots(
+            color: Colors.blue,
+            duration: Duration(seconds: 2),
+          );
+        }
+        if (state is TodoListSuccess) {
+          return ListView.separated(
+            itemBuilder: (context, index) => TodoItemCard(title: state.todoList[index].title ?? ''),
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 10.0,
+            ),
+            itemCount: state.todoList.length,
+          );
+        }
+        return Container();
+      },
+    );
   }
 }

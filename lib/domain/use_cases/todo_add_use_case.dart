@@ -5,7 +5,7 @@ import 'package:todos/domain/repository/todo_repository.dart';
 
 import '../model/todo.dart';
 
-@lazySingleton
+@injectable
 class TodoAddUseCase {
   final TodoRepository _repository;
 
